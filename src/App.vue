@@ -22,6 +22,10 @@ export default {
     TasksList,
     Footer,
   },
+  mounted() {
+    const { dispatch } = this.$store;
+    dispatch('getTodos');
+  },
 };
 </script>
 

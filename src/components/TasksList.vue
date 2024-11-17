@@ -1,8 +1,15 @@
 <template>
-  <ul class="todo-list"><Task /></ul>
+  <ul class="todo-list">
+    <Task
+      v-for="todo in allTodos"
+      :key="todo.id"
+      :task="todo"
+    />
+  </ul>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import Task from './Task';
 
 export default {
@@ -12,7 +19,11 @@ export default {
     return {
     };
   },
-
+  computed: {
+    ...mapGetters([
+      'allTodos',
+    ]),
+  },
 };
 </script>
 

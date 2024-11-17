@@ -1,12 +1,16 @@
 <template>
-  <li class="task">
+  <li
+    class="task"
+    :class="[this.task.completed ? 'task_completed' : '', this.task.editing ? 'task_editing' : '']"
+  >
     <div class="view">
       <input
         class="toggle"
         type="checkbox"
+        :checked="this.task.completed"
       />
       <label>
-        <span class="title">{{ text }}</span>
+        <span class="title">{{ this.task.title }}</span>
       </label>
       <button class="icon icon-edit"></button>
       <button class="icon icon-destroy"></button>
@@ -19,14 +23,15 @@
 </template>
 
 <script>
+
+
 export default {
   name: 'Task',
   data() {
     return {
-      text: 'task',
     };
   },
-
+  props: ['task'],
 };
 </script>
 
