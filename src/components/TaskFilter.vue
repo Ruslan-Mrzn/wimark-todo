@@ -1,17 +1,26 @@
 <template>
   <ul class="filters">
       <li>
-        <button class="selected">
+        <button
+          :class="todoFilters.all ? 'selected' : ''"
+          v-on:click="setFilterAllTodos()"
+          >
           All
         </button>
       </li>
       <li>
-        <button>
+        <button
+          :class="todoFilters.active ? 'selected' : ''"
+          v-on:click="setFilterActiveTodos()"
+          >
           Active
         </button>
       </li>
       <li>
-        <button>
+        <button
+          :class="todoFilters.completed ? 'selected' : ''"
+          v-on:click="setFilterCompletedTodos()"
+          >
           Completed
         </button>
       </li>
@@ -19,7 +28,7 @@
 </template>
 
 <script>
-// import Task from './Task';
+import { mapMutations, mapGetters } from 'vuex';
 
 export default {
   name: 'TaskFilter',
@@ -27,7 +36,18 @@ export default {
     return {
     };
   },
-
+  computed: {
+    ...mapGetters([
+      'todoFilters',
+    ]),
+  },
+  methods: {
+    ...mapMutations([
+      'setFilterActiveTodos',
+      'setFilterAllTodos',
+      'setFilterCompletedTodos',
+    ]),
+  },
 };
 </script>
 

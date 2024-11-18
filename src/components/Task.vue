@@ -1,37 +1,65 @@
 <template>
   <li
     class="task"
-    :class="[this.task.completed ? 'task_completed' : '', this.task.editing ? 'task_editing' : '']"
+    :class="[
+      task.completed ? 'task_completed' : '',
+      task.editing ? 'task_editing' : '',
+      task.completed&&todoFilters.active ? 'hidden' : '',
+      !task.completed&&todoFilters.completed ? 'hidden' : '',
+
+    ]"
   >
     <div class="view">
       <input
         class="toggle"
         type="checkbox"
-        :checked="this.task.completed"
+        :checked="task.completed"
+        v-on:change="toggleCompletedTodo(task.id)"
       />
       <label>
-        <span class="title">{{ this.task.title }}</span>
+        <span class="title">{{ task.title }}</span>
       </label>
-      <button class="icon icon-edit"></button>
-      <button class="icon icon-destroy"></button>
+      <button class="icon icon-edit" v-on:click="editTodo(task.id)"></button>
+      <button class="icon icon-destroy" v-on:click="deleteTodo(task.id)"></button>
     </div>
     <input
       type="text"
       class="edit"
+      v-bind:value="taskText"
+      v-on:input="taskTextInput"
+      v-on:keyup.enter="submitEditingTodo({ taskId: task.id, text: taskText })"
+      autofocus
     />
   </li>
 </template>
 
 <script>
-
+import { mapMutations, mapGetters } from 'vuex';
 
 export default {
   name: 'Task',
   data() {
     return {
+      taskText: this.task.title,
     };
   },
   props: ['task'],
+  computed: {
+    ...mapGetters([
+      'todoFilters',
+    ]),
+  },
+  methods: {
+    ...mapMutations([
+      'deleteTodo',
+      'editTodo',
+      'submitEditingTodo',
+      'toggleCompletedTodo',
+    ]),
+    taskTextInput(e) {
+      this.taskText = e.target.value;
+    },
+  },
 };
 </script>
 

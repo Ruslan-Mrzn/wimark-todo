@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex';
 
 export default {
   name: 'NewTaskForm',
@@ -28,8 +29,12 @@ export default {
       this.newTaskText = e.target.value;
     },
     addNewTask() {
+      this.addNewTodo(this.newTaskText);
       this.newTaskText = '';
     },
+    ...mapMutations([
+      'addNewTodo',
+    ]),
   },
 };
 </script>

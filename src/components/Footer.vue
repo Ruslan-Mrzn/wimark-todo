@@ -1,14 +1,18 @@
 <template>
   <footer class="footer">
-    <span class="todo-count">0 items left</span>
+    <span class="todo-count">{{ uncompletedTasksCount }} items left</span>
     <TaskFilter />
-    <button class="clear-completed">
+    <button
+      class="clear-completed"
+      v-on:click="clearCompletedTasks()"
+    >
       Clear completed
     </button>
   </footer>
 </template>
 
 <script>
+import { mapMutations, mapGetters } from 'vuex';
 import TaskFilter from './TaskFilter';
 
 export default {
@@ -18,7 +22,16 @@ export default {
     return {
     };
   },
-
+  computed: {
+    ...mapGetters([
+      'uncompletedTasksCount',
+    ]),
+  },
+  methods: {
+    ...mapMutations([
+      'clearCompletedTasks',
+    ]),
+  },
 };
 </script>
 

@@ -9,7 +9,13 @@ Vue.use(Vuex);
 // eslint-disable-next-line import/prefer-default-export
 export const store = new Vuex.Store({
   state: {
+    todosId: 100,
     todos: [],
+    todoFilters: {
+      all: true,
+      active: false,
+      completed: false,
+    },
   },
   actions,
   mutations,
