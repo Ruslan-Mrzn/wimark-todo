@@ -59,6 +59,7 @@ export default {
     min-width: 230px;
     max-width: 550px;
     min-height: 50px;
+    border-radius: 15px;
   }
   .request-modal:hover {
     opacity: 1;

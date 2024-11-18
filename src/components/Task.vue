@@ -16,9 +16,9 @@
         :checked="task.completed"
         v-on:change="toggleCompletedTodo(task.id)"
       />
-      <label>
+      <p>
         <span class="title">{{ task.title }}</span>
-      </label>
+      </p>
       <button class="icon icon-edit" v-on:click="editTodo(task.id)"></button>
       <button class="icon icon-destroy" v-on:click="deleteTodo(task.id)"></button>
     </div>
@@ -111,17 +111,17 @@ export default {
     opacity: 0;
   }
 
-  .toggle + label{
+  .toggle + p{
     background-image: url('../assets/checkbox.svg');
     background-repeat: no-repeat;
     background-position: center left;
   }
 
-  .toggle:checked + label {
+  .toggle:checked + p {
     background-image: url('../assets/checkbox_checked.svg');
   }
 
-  label {
+  p {
     display: flex;
     align-items: center;
     justify-content: space-between;
