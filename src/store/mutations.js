@@ -68,4 +68,8 @@ export default {
     };
   },
 
+  setRequestState(state, value) {
+    state.requestState = { ...state.requestState, ...value };
+  },
+
 };

@@ -1,5 +1,6 @@
 <template>
   <section class="todoapp">
+    <RequestModal />
     <header class="todoapp__header">
       <h1 class="todoapp__title">todos</h1>
       <NewTaskForm />
@@ -12,6 +13,7 @@
 <script>
 import Footer from './components/Footer';
 import NewTaskForm from './components/NewTaskForm';
+import RequestModal from './components/RequestModal';
 import TasksList from './components/TasksList';
 
 
@@ -21,6 +23,7 @@ export default {
     NewTaskForm,
     TasksList,
     Footer,
+    RequestModal,
   },
   mounted() {
     const { dispatch } = this.$store;
@@ -36,6 +39,10 @@ export default {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+html {
+  padding-top: 50px;
 }
 
 button {

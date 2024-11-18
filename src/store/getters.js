@@ -10,4 +10,8 @@ export default {
   todoFilters(state) {
     return state.todoFilters;
   },
+
+  requestState(state) {
+    return state.requestState;
+  },
 };

@@ -16,6 +16,12 @@ export const store = new Vuex.Store({
       active: false,
       completed: false,
     },
+    requestState: {
+      idle: true,
+      loading: false,
+      error: false,
+      success: false,
+    },
   },
   actions,
   mutations,
