@@ -1,7 +1,7 @@
 export default {
 
   addTodosFromServer(state, todosFromServer) {
-    const todos = todosFromServer.slice(0, 5)
+    const todos = todosFromServer
       .map(({ id, title, completed }) => ({ id, title, completed, editing: false }));
     state.todos = state.todos.concat(todos);
   },
