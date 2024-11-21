@@ -6,7 +6,6 @@
       task.editing ? 'task_editing' : '',
       task.completed&&todoFilters.active ? 'hidden' : '',
       !task.completed&&todoFilters.completed ? 'hidden' : '',
-
     ]"
   >
     <div class="view">
@@ -19,15 +18,16 @@
       <p>
         <span class="title">{{ task.title }}</span>
       </p>
-      <button class="icon icon-edit" v-on:click="editTodo(task.id)"></button>
+      <button class="icon icon-edit" v-on:click="onEditClick()"></button>
       <button class="icon icon-destroy" v-on:click="deleteTodo(task.id)"></button>
     </div>
     <input
       type="text"
       class="edit"
+      :class="isInvalid ? 'edit_invalid' : ''"
       v-bind:value="taskText"
       v-on:input="taskTextInput"
-      v-on:keyup.enter="submitEditingTodo({ taskId: task.id, text: taskText })"
+      v-on:keyup.enter="saveChanges()"
       autofocus
     />
   </li>
@@ -41,6 +41,7 @@ export default {
   data() {
     return {
       taskText: this.task.title,
+      isInvalid: false,
     };
   },
   props: ['task'],
@@ -58,6 +59,19 @@ export default {
     ]),
     taskTextInput(e) {
       this.taskText = e.target.value;
+    },
+    saveChanges() {
+      const trimmedText = this.taskText.trim();
+      if (trimmedText === '') {
+        this.isInvalid = true;
+        setTimeout(() => { this.isInvalid = false; }, 1000);
+        return;
+      }
+      this.submitEditingTodo({ taskId: this.task.id, text: trimmedText });
+    },
+    onEditClick() {
+      this.editTodo(this.task.id);
+      this.taskText = this.task.title;
     },
   },
 };
@@ -89,6 +103,30 @@ export default {
     font-weight: 400;
     color: #4d4d4d;
     outline: none;
+  }
+
+  .task_editing .edit_invalid {
+    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+    transform: translate3d(0, 0, 0);
+    border-color: rgba(175, 47, 47, 0.5);
+  }
+
+  @keyframes shake {
+    10%, 90% {
+      transform: translate3d(-1px, 0, 0);
+    }
+
+    20%, 80% {
+      transform: translate3d(2px, 0, 0);
+    }
+
+    30%, 50%, 70% {
+      transform: translate3d(-4px, 0, 0);
+    }
+
+    40%, 60% {
+      transform: translate3d(4px, 0, 0);
+    }
   }
 
   .task_editing .view {
