@@ -1,7 +1,9 @@
 <template>
   <ul class="todo-list">
     <Task
-      v-for="todo in allTodos"
+      v-for="todo in todoFilters === 'all' ? allTodos
+      : todoFilters === 'active' ? activeTodos
+      : completedTodos"
       :key="todo.id"
       :task="todo"
     />
@@ -22,6 +24,9 @@ export default {
   computed: {
     ...mapGetters([
       'allTodos',
+      'completedTodos',
+      'activeTodos',
+      'todoFilters',
     ]),
   },
 };

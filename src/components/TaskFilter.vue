@@ -2,24 +2,24 @@
   <ul class="filters">
       <li>
         <button
-          :class="todoFilters.all ? 'selected' : ''"
-          v-on:click="setFilterAllTodos()"
+          :class="todoFilters === 'all' ? 'selected' : ''"
+          v-on:click="setFilter('all')"
           >
           All
         </button>
       </li>
       <li>
         <button
-          :class="todoFilters.active ? 'selected' : ''"
-          v-on:click="setFilterActiveTodos()"
+          :class="todoFilters === 'active' ? 'selected' : ''"
+          v-on:click="setFilter('active')"
           >
           Active
         </button>
       </li>
       <li>
         <button
-          :class="todoFilters.completed ? 'selected' : ''"
-          v-on:click="setFilterCompletedTodos()"
+          :class="todoFilters === 'completed' ? 'selected' : ''"
+          v-on:click="setFilter('completed')"
           >
           Completed
         </button>
@@ -43,9 +43,8 @@ export default {
   },
   methods: {
     ...mapMutations([
-      'setFilterActiveTodos',
-      'setFilterAllTodos',
-      'setFilterCompletedTodos',
+      'setFilter',
+
     ]),
   },
 };

@@ -41,35 +41,16 @@ export default {
   },
 
   clearCompletedTasks(state) {
-    state.todos = [...state.todos.filter(({ completed }) => !completed)];
+    state.todos = state.todos.filter(({ completed }) => !completed);
   },
 
-  setFilterActiveTodos(state) {
-    state.todoFilters = {
-      all: false,
-      active: true,
-      completed: false,
-    };
-  },
 
-  setFilterAllTodos(state) {
-    state.todoFilters = {
-      all: true,
-      active: false,
-      completed: false,
-    };
-  },
-
-  setFilterCompletedTodos(state) {
-    state.todoFilters = {
-      all: false,
-      active: false,
-      completed: true,
-    };
+  setFilter(state, value) {
+    state.todoFilters = value;
   },
 
   setRequestState(state, value) {
-    state.requestState = { ...state.requestState, ...value };
+    state.requestState = value;
   },
 
 };

@@ -1,6 +1,6 @@
 <template>
   <footer class="footer">
-    <span class="todo-count">{{ uncompletedTasksCount }} items left</span>
+    <span class="todo-count">{{ activeTodos.length }} items left</span>
     <TaskFilter />
     <button
       class="clear-completed"
@@ -24,7 +24,7 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'uncompletedTasksCount',
+      'activeTodos',
     ]),
   },
   methods: {

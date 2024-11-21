@@ -2,22 +2,22 @@
   <section
     class="request-modal"
     :class="[
-        requestState.idle || requestState.loading ? 'processing' : '',
-        requestState.error ? 'error' : '',
-        requestState.success ? 'success' : ''
+        requestState === 'idle' || requestState === 'loading' ? 'processing' : '',
+        requestState === 'error' ? 'error' : '',
+        requestState === 'success' ? 'success' : ''
       ]"
   >
     <div
-      v-if="requestState.loading"
+      v-if="requestState === 'loading'"
       class="spinner-container"
       >
       <Spinner/>
     </div>
     <p>
-      {{ requestState.idle ? idleText : '' }}
-      {{ requestState.loading ? loadingText : '' }}
-      {{ requestState.error ? errorText : '' }}
-      {{ requestState.success ? successText : '' }}
+      {{ requestState === 'idle' ? idleText : '' }}
+      {{ requestState === 'loading' ? loadingText : '' }}
+      {{ requestState === 'error' ? errorText : '' }}
+      {{ requestState === 'success' ? successText : '' }}
     </p>
   </section>
 </template>

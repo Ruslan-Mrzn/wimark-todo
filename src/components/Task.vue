@@ -4,8 +4,6 @@
     :class="[
       task.completed ? 'task_completed' : '',
       task.editing ? 'task_editing' : '',
-      task.completed&&todoFilters.active ? 'hidden' : '',
-      !task.completed&&todoFilters.completed ? 'hidden' : '',
     ]"
   >
     <div class="view">
@@ -34,7 +32,7 @@
 </template>
 
 <script>
-import { mapMutations, mapGetters } from 'vuex';
+import { mapMutations } from 'vuex';
 
 export default {
   name: 'Task',
@@ -45,11 +43,6 @@ export default {
     };
   },
   props: ['task'],
-  computed: {
-    ...mapGetters([
-      'todoFilters',
-    ]),
-  },
   methods: {
     ...mapMutations([
       'deleteTodo',
